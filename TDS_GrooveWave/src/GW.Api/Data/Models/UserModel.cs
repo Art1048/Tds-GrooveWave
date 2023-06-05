@@ -5,9 +5,9 @@ namespace GW.Api.Data.Models
 {
     public class UserModel : Entity
     {
-        public UserModel() { }
+       // public UserModel() { }
 
-        public UserModel(int id, string firstName, string lastName, string phone , string email, string password)
+        public UserModel(int id, string firstName, string lastName, string? phone , string email, string password)
         {
             Id = id;
             FirstName = firstName;
@@ -23,7 +23,7 @@ namespace GW.Api.Data.Models
         [Required(ErrorMessage = "O sobrenome é obrigatório")]
         public string LastName { get; set; } = default!;
 
-        public string Phone { get; set; } = default!;
+        public string? Phone { get; set; } = default!;
 
         [Required(ErrorMessage = "O Email é obrigatório")]
         public string Email { get; set; } = default!;

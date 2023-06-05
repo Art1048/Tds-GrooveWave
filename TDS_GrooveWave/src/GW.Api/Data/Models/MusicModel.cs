@@ -5,7 +5,7 @@ namespace GW.Api.Data.Models
 {
     public class MusicModel : Entity
     {
-        public MusicModel() { }
+        //public MusicModel() { }
 
         public MusicModel(int musicId, string TrackLink, string Photo, int AuthorId)
         {
@@ -19,7 +19,9 @@ namespace GW.Api.Data.Models
         public int AuthorId { get; set; }
         public string TrackLink { get; set; } = default!;
         public string Photo { get; set; } = default!;
-        public List<PlayListModel>? Playlists { get; set; }
+       // public List<PlayListModel>? Playlists { get; set; }
+
+         public List<int>? PlaylistsId { get; set; }
 
     }
 }

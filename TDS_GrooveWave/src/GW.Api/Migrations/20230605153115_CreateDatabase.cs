@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -12,7 +13,7 @@ namespace GW.Api.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "ServiceModel",
+                name: "MusicModel",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -20,33 +21,17 @@ namespace GW.Api.Migrations
                     MusicId = table.Column<int>(type: "integer", nullable: false),
                     AuthorId = table.Column<int>(type: "integer", nullable: false),
                     TrackLink = table.Column<string>(type: "text", nullable: false),
-                    Photo = table.Column<string>(type: "text", nullable: false)
+                    Photo = table.Column<string>(type: "text", nullable: false),
+                    PlaylistsId = table.Column<List<int>>(type: "integer[]", nullable: true),
+                    PlayListModelId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ServiceModel", x => x.Id);
+                    table.PrimaryKey("PK_MusicModel", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "MusicModelPlayListModel",
-                columns: table => new
-                {
-                    MusicsId = table.Column<int>(type: "integer", nullable: false),
-                    PlaylistsId = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MusicModelPlayListModel", x => new { x.MusicsId, x.PlaylistsId });
-                    table.ForeignKey(
-                        name: "FK_MusicModelPlayListModel_ServiceModel_MusicsId",
-                        column: x => x.MusicsId,
-                        principalTable: "ServiceModel",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TableModel",
+                name: "PlayListModel",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -59,7 +44,7 @@ namespace GW.Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TableModel", x => x.Id);
+                    table.PrimaryKey("PK_PlayListModel", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -70,7 +55,7 @@ namespace GW.Api.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     FirstName = table.Column<string>(type: "text", nullable: false),
                     LastName = table.Column<string>(type: "text", nullable: false),
-                    Phone = table.Column<string>(type: "text", nullable: false),
+                    Phone = table.Column<string>(type: "text", nullable: true),
                     Email = table.Column<string>(type: "text", nullable: false),
                     Password = table.Column<string>(type: "text", nullable: false),
                     PlayListFavoritaId = table.Column<int>(type: "integer", nullable: true)
@@ -79,20 +64,20 @@ namespace GW.Api.Migrations
                 {
                     table.PrimaryKey("PK_UserModel", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserModel_TableModel_PlayListFavoritaId",
+                        name: "FK_UserModel_PlayListModel_PlayListFavoritaId",
                         column: x => x.PlayListFavoritaId,
-                        principalTable: "TableModel",
+                        principalTable: "PlayListModel",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_MusicModelPlayListModel_PlaylistsId",
-                table: "MusicModelPlayListModel",
-                column: "PlaylistsId");
+                name: "IX_MusicModel_PlayListModelId",
+                table: "MusicModel",
+                column: "PlayListModelId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TableModel_UserModelId",
-                table: "TableModel",
+                name: "IX_PlayListModel_UserModelId",
+                table: "PlayListModel",
                 column: "UserModelId");
 
             migrationBuilder.CreateIndex(
@@ -101,16 +86,15 @@ namespace GW.Api.Migrations
                 column: "PlayListFavoritaId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_MusicModelPlayListModel_TableModel_PlaylistsId",
-                table: "MusicModelPlayListModel",
-                column: "PlaylistsId",
-                principalTable: "TableModel",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                name: "FK_MusicModel_PlayListModel_PlayListModelId",
+                table: "MusicModel",
+                column: "PlayListModelId",
+                principalTable: "PlayListModel",
+                principalColumn: "Id");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_TableModel_UserModel_UserModelId",
-                table: "TableModel",
+                name: "FK_PlayListModel_UserModel_UserModelId",
+                table: "PlayListModel",
                 column: "UserModelId",
                 principalTable: "UserModel",
                 principalColumn: "Id");
@@ -120,17 +104,14 @@ namespace GW.Api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_UserModel_TableModel_PlayListFavoritaId",
+                name: "FK_UserModel_PlayListModel_PlayListFavoritaId",
                 table: "UserModel");
 
             migrationBuilder.DropTable(
-                name: "MusicModelPlayListModel");
+                name: "MusicModel");
 
             migrationBuilder.DropTable(
-                name: "ServiceModel");
-
-            migrationBuilder.DropTable(
-                name: "TableModel");
+                name: "PlayListModel");
 
             migrationBuilder.DropTable(
                 name: "UserModel");

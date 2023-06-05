@@ -5,7 +5,7 @@ namespace GW.Api.Data.Models
 {
     public class PlayListModel : Entity
     {
-        public PlayListModel() { }
+        //public PlayListModel() { }
 
         public PlayListModel(int id, int code, string name, bool isFavorite)
         {

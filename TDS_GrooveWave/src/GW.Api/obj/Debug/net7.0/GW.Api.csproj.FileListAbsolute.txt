@@ -41,3 +41,46 @@ C:\Users\arthu\OneDrive\Área de Trabalho\Nova pasta\TDS_GrooveWave\src\GW.api\o
 C:\Users\arthu\OneDrive\Área de Trabalho\Nova pasta\TDS_GrooveWave\src\GW.api\obj\Debug\net7.0\GW.Api.pdb
 C:\Users\arthu\OneDrive\Área de Trabalho\Nova pasta\TDS_GrooveWave\src\GW.api\obj\Debug\net7.0\GW.Api.genruntimeconfig.cache
 C:\Users\arthu\OneDrive\Área de Trabalho\Nova pasta\TDS_GrooveWave\src\GW.api\obj\Debug\net7.0\ref\GW.Api.dll
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\bin\Debug\net7.0\appsettings.Development.json
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\bin\Debug\net7.0\appsettings.json
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\bin\Debug\net7.0\GW.Api.exe
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\bin\Debug\net7.0\GW.Api.deps.json
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\bin\Debug\net7.0\GW.Api.runtimeconfig.json
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\bin\Debug\net7.0\GW.Api.dll
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\bin\Debug\net7.0\GW.Api.pdb
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\bin\Debug\net7.0\Humanizer.dll
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\bin\Debug\net7.0\Microsoft.OpenApi.dll
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\bin\Debug\net7.0\Mono.TextTemplating.dll
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\bin\Debug\net7.0\Npgsql.dll
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\bin\Debug\net7.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\bin\Debug\net7.0\System.CodeDom.dll
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\obj\Debug\net7.0\GW.Api.csproj.AssemblyReference.cache
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\obj\Debug\net7.0\GW.Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\obj\Debug\net7.0\GW.Api.AssemblyInfoInputs.cache
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\obj\Debug\net7.0\GW.Api.AssemblyInfo.cs
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\obj\Debug\net7.0\GW.Api.csproj.CoreCompileInputs.cache
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\obj\Debug\net7.0\GW.Api.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\obj\Debug\net7.0\GW.Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\obj\Debug\net7.0\staticwebassets\msbuild.GW.Api.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\obj\Debug\net7.0\staticwebassets\msbuild.build.GW.Api.props
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.GW.Api.props
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.GW.Api.props
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\obj\Debug\net7.0\staticwebassets.pack.json
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\obj\Debug\net7.0\staticwebassets.build.json
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\obj\Debug\net7.0\staticwebassets.development.json
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\obj\Debug\net7.0\scopedcss\bundle\GW.Api.styles.css
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\obj\Debug\net7.0\GW.Api.csproj.CopyComplete
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\obj\Debug\net7.0\GW.Api.dll
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\obj\Debug\net7.0\refint\GW.Api.dll
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\obj\Debug\net7.0\GW.Api.pdb
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\obj\Debug\net7.0\GW.Api.genruntimeconfig.cache
+C:\Users\arthu\OneDrive\Área de Trabalho\Tds-GrroveWave\Tds-GrooveWave\TDS_GrooveWave\src\GW.Api\obj\Debug\net7.0\ref\GW.Api.dll

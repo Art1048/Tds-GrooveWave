@@ -5,10 +5,10 @@ namespace GW.Api.Data.Repository
 {
     public class Context : DbContext
     {
-        public DbSet<MusicModel>? ServiceModel { get; set; }
-        public DbSet<PlayListModel>? TableModel { get; set; }
+        public DbSet<MusicModel>? MusicModel { get; set; }
+        public DbSet<PlayListModel>? PlayListModel { get; set; }
         public DbSet<UserModel>? UserModel { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder options) =>
-            options.UseNpgsql("Host=localhost:5432;Username=arthu;Password=123;Database=postgres");
+            options.UseNpgsql("Host=localhost:5432;Username=postgres;Password=senha_secreta;Database=meu_postgres");
     }
 }
