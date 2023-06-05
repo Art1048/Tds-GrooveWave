@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "ooY4cmVWlmHJwS3Yry8ZoerRjoplYXnbnztC1yF6B9Y=",
+  "Source": "GW.Api",
+  "BasePath": "_content/GW.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
