@@ -4,46 +4,58 @@ using GW.Api.Data.Repository;
 
 namespace GW.Api.Controllers.PlayListController
 {
-    // [ApiController]
-    // [Route("api/[controller]")]
-    // public class PlayListController : ControllerBase
-    // {
+    [ApiController]
+    [Route("api/[controller]")]
+    public class PlayListController : ControllerBase
+    {
 
 
-    //     [HttpGet]
-    //     public async Task<IActionResult> Get()
-    //     {
-    //         var PlayLists = await _PlayListRepository.GetAll();
-    //         return Ok(PlayLists);
-    //     }
+    [HttpGet]
+        public IActionResult Get(
+         [FromServices] Context context) => Ok(context.PlayListModel!.ToList());
 
-    //     [HttpGet("{id}")]
-    //     public async Task<IActionResult> Get(int id)
-    //     {
-    //         var PlayList = await _PlayListRepository.GetById(id);
-    //         return Ok(PlayList);
-    //     }
+        [HttpGet("{id:int}")]
+        public IActionResult Get([FromServices] Context context , [FromRoute] int id){
+            PlayListModel PlayList = context.PlayListModel.FirstOrDefault(x => x.PlayListId == id);
+            if(PlayList != null){
+                return Ok(PlayList);
+            }
+            else{
+                return NotFound();
+            }
+        }
+        
+        [HttpPost]
+        public IActionResult Post([FromServices] Context context, [FromBody] PlayListModel PlayList){
+            context.PlayListModel!.Add(PlayList);
+            context.SaveChanges();
+            return Ok(PlayList);
+        }
 
-    //     [HttpPost]
-    //     public async Task<IActionResult> Post([FromBody] PlayListModel PlayList)
-    //     {
-    //         await _PlayListRepository.Add(PlayList);
-    //         return Ok();
-    //     }
-
-    //     [HttpPut]
-    //     public async Task<IActionResult> Put([FromBody] PlayListModel PlayList)
-    //     {
-    //         await _PlayListRepository.Update(PlayList);
-    //         return Ok();
-    //     }
-
-    //     [HttpDelete("{id}")]
-    //     public async Task<IActionResult> Delete(int id)
-    //     {
-    //         Console.WriteLine(id);
-    //         await _PlayListRepository.RemoveById(id);
-    //         return Ok();
-    //     }
-    // }
+        [HttpPut]
+        public IActionResult Put([FromServices] Context context , [FromBody] PlayListModel PlayList){
+            PlayListModel PlayListDB = context.PlayListModel.FirstOrDefault(x => x.PlayListId == PlayList.PlayListId);
+            if(PlayListDB != null){
+                context.PlayListModel!.Update(PlayList);
+                context.SaveChanges();
+                return Ok(PlayList);
+            }
+            else{
+                return NotFound();
+            }
+        }
+        
+        [HttpDelete("{id:int}")]
+        public IActionResult Delete([FromServices] Context context , [FromRoute] int id){
+            PlayListModel PlayList = context.PlayListModel.FirstOrDefault(x => x.PlayListId == id);
+            if(PlayList != null){
+                context.PlayListModel!.Remove(PlayList);
+                context.SaveChanges();
+                return Ok(PlayList);
+            }
+            else{
+                return NotFound();
+            }
+        }
+    }
 }
