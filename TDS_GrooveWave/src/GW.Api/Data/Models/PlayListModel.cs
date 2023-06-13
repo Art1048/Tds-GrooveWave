@@ -1,20 +1,20 @@
 using System.ComponentModel.DataAnnotations;
-using GW.Api.Data.Models.Shared;
+
 
 namespace GW.Api.Data.Models
 {
-    public class PlayListModel : Entity
+    public class PlayListModel
     {
-        //public PlayListModel() { }
+        public PlayListModel() { }
 
         public PlayListModel(int id, int code, string name, bool isFavorite)
         {
-            Id = id;
-            Code = code;
+            PlayListId = id;
             Name = name;
             IsFavorite = isFavorite;
         }
-        public int Code { get; set; }
+        [Key]
+        public int PlayListId { get; set; }
 
         [Required(ErrorMessage = "O nome da playlist é obrigatório")]
         public string Name { get; set; } = default!;

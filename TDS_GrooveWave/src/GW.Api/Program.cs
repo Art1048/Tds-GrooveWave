@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.HttpOverrides;
+using GW.Api.Data.Repository;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
+builder.Services.AddDbContext<Context>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var app = builder.Build();

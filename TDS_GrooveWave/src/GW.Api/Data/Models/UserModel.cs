@@ -1,21 +1,23 @@
 using System.ComponentModel.DataAnnotations;
-using GW.Api.Data.Models.Shared;
 
 namespace GW.Api.Data.Models
 {
-    public class UserModel : Entity
+    public class UserModel 
     {
-       // public UserModel() { }
+        public UserModel() { }
 
-        public UserModel(int id, string firstName, string lastName, string? phone , string email, string password)
+        public UserModel(int userid, string firstName, string lastName, string? phone , string email, string password)
         {
-            Id = id;
+            UserId = userid;
             FirstName = firstName;
             LastName = lastName;
             Phone = phone;
             Email = email;
             Password = password;
         }
+
+        [Key]
+        public int UserId { get; set; }
 
         [Required(ErrorMessage = "O nome é obrigatório")]
         public string FirstName { get; set; } = default!;

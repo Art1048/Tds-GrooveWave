@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using GW.Api.Data.Models;
 using GW.Api.Data.Repository;
+using GW.Api.Controllers.MusicServ;
+
 
 namespace GW.Api.Controllers.MusicController
 {
@@ -8,46 +10,42 @@ namespace GW.Api.Controllers.MusicController
     [Route("api/[controller]")]
     public class MusicController : ControllerBase
     {
-        private readonly MusicRepository _MusicRepository;
-
-        public MusicController(Context context)
-        {
-            _MusicRepository = new MusicRepository(context);
-        }
-
         [HttpGet]
-        public async Task<IActionResult> Get()
-        {
-            var Musics = await _MusicRepository.GetAll();
-            return Ok(Musics);
-        }
+        public IActionResult Get(
+         [FromServices] Context context) => Ok(context.MusicModel!.ToList());
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+
+        
+        [HttpGet("{id:int}")]
+        public virtual async Task<IActionResult> Get([FromServices] Context context , [FromRoute] int id)
         {
-            var Music = await _MusicRepository.GetById(id);
-            return Ok(Music);
+            MusicModel Music = context.MusicModel.FirstOrDefault(x => x.MusicId == id);
+            if(Music != null){
+                return Ok(Music);
+            }
+            else{
+                MusicService MusicService = new MusicService();
+                MusicModel MusicDeazer = await MusicService.GetMusic(id);
+
+                if(MusicDeazer != null)
+                {
+                    Post(MusicDeazer ,context);
+                    return Ok(MusicDeazer);
+                }
+                else{
+                    return NotFound();
+                }
+                
+                
+            }
+            
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] MusicModel Music)
-        {
-            var response = await _MusicRepository.Add(Music);
-            return Ok(response);
-        }
-
-        [HttpPut]
-        public async Task<IActionResult> Put([FromBody] MusicModel Music)
-        {
-            await _MusicRepository.Update(Music);
-            return Ok();
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            await _MusicRepository.RemoveById(id);
-            return Ok();
+        public IActionResult Post([FromBody] MusicModel Music , [FromServices] Context context){
+            context.MusicModel!.Add(Music);
+            context.SaveChanges();
+            return Ok(Music);
         }
     }
 }
