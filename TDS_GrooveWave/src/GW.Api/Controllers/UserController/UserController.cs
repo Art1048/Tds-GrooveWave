@@ -31,8 +31,8 @@ namespace GW.Api.Controllers.UserController
             return Ok(User);
         }
 
-        [HttpGet("{id:int}")]
-        public IActionResult Put([FromServices] Context context , [FromRoute] UserModel User){
+        [HttpPut]
+        public IActionResult Put([FromServices] Context context , [FromBody] UserModel User){
             UserModel UserDB = context.UserModel.FirstOrDefault(x => x.UserId == User.UserId);
             if(UserDB != null){
                 context.UserModel!.Update(User);
@@ -43,9 +43,8 @@ namespace GW.Api.Controllers.UserController
                 return NotFound();
             }
         }
-
-
-        [HttpGet("{id:int}")]
+        
+        [HttpDelete("{id:int}")]
         public IActionResult Delete([FromServices] Context context , [FromRoute] int id){
             UserModel User = context.UserModel.FirstOrDefault(x => x.UserId == id);
             if(User != null){

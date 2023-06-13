@@ -34,9 +34,7 @@ namespace GW.Api.Controllers.MusicController
                 }
                 else{
                     return NotFound();
-                }
-                
-                
+                }  
             }
             
         }

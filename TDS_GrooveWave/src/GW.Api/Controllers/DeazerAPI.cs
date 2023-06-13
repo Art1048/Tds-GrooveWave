@@ -15,7 +15,6 @@ public class MusicService
 
     public async Task<MusicModel> GetMusic(int id){
         await this.GetMusicFromExternalAPIAsync(id);
-        Console.WriteLine($"music title:{this.Music.MusicName}");
 
         if(this.Music.MusicName != null)
         {
@@ -34,12 +33,14 @@ public class MusicService
 
         
         HttpResponseMessage response = await httpClient.GetAsync($"track/{id.ToString()}");
-        if (response.IsSuccessStatusCode)
+        string jsonResponse = await response.Content.ReadAsStringAsync();
+        JObject json = JObject.Parse(jsonResponse);
+        dynamic music = json;
+        Console.WriteLine($"json:{music}");
+        Console.WriteLine($"response:{response}");
+
+        if (music.error == null)
         {
-            string jsonResponse = await response.Content.ReadAsStringAsync();
-            JObject json = JObject.Parse(jsonResponse);
-            dynamic music = json;
-            Console.WriteLine($"music title:{json}");
             this.Music.MusicId = id;
             this.Music.MusicName = music.title;
             this.Music.TrackLink = music.preview;
@@ -49,7 +50,7 @@ public class MusicService
             this.Music.AuthorName = music.artist.name;
         }
         else{
-            this.Music = null;
+            this.Music.MusicName = null;
         }  
     }
 }
