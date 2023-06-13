@@ -4,50 +4,58 @@ using GW.Api.Data.Repository;
 
 namespace GW.Api.Controllers.UserController
 {
-    // [ApiController]
-    // [Route("api/[controller]")]
-    // public class UserController : ControllerBase
-    // {
-    //     private readonly UserRepository _userRepository;
+    [ApiController]
+    [Route("api/[controller]")]
+    public class UserController : ControllerBase
+    {
 
-    //     public UserController(Context context)
-    //     {
-    //         _userRepository = new UserRepository(context);
-    //     }
+        [HttpGet]
+        public IActionResult Get(
+         [FromServices] Context context) => Ok(context.UserModel!.ToList());
 
-    //     [HttpGet]
-    //     public async Task<IActionResult> Get()
-    //     {
-    //         var Users = await _userRepository.GetAll();
-    //         return Ok(Users);
-    //     }
+        [HttpGet("{id:int}")]
+        public IActionResult Get([FromServices] Context context , [FromRoute] int id){
+            UserModel User = context.UserModel.FirstOrDefault(x => x.UserId == id);
+            if(User != null){
+                return Ok(User);
+            }
+            else{
+                return NotFound();
+            }
+        }
+        
+        [HttpPost]
+        public IActionResult Post([FromServices] Context context, [FromBody] UserModel User){
+            context.UserModel!.Add(User);
+            context.SaveChanges();
+            return Ok(User);
+        }
 
-    //     [HttpGet("{id}")]
-    //     public async Task<IActionResult> Get(int id)
-    //     {
-    //         var user = await _userRepository.GetById(id);
-    //         return Ok(user);
-    //     }
+        [HttpGet("{id:int}")]
+        public IActionResult Put([FromServices] Context context , [FromRoute] UserModel User){
+            UserModel UserDB = context.UserModel.FirstOrDefault(x => x.UserId == User.UserId);
+            if(UserDB != null){
+                context.UserModel!.Update(User);
+                context.SaveChanges();
+                return Ok(User);
+            }
+            else{
+                return NotFound();
+            }
+        }
 
-    //     [HttpPost]
-    //     public async Task<IActionResult> Post([FromBody] UserModel user)
-    //     {
-    //         await _userRepository.Add(user);
-    //         return Ok();
-    //     }
 
-    //     [HttpPut]
-    //     public async Task<IActionResult> Put([FromBody] UserModel user)
-    //     {
-    //         await _userRepository.Update(user);
-    //         return Ok();
-    //     }
-
-    //     [HttpDelete("{id}")]
-    //     public async Task<IActionResult> Delete(int id)
-    //     {
-    //         await _userRepository.RemoveById(id);
-    //         return Ok();
-    //     }
-    // }
+        [HttpGet("{id:int}")]
+        public IActionResult Delete([FromServices] Context context , [FromRoute] int id){
+            UserModel User = context.UserModel.FirstOrDefault(x => x.UserId == id);
+            if(User != null){
+                context.UserModel!.Remove(User);
+                context.SaveChanges();
+                return Ok(User);
+            }
+            else{
+                return NotFound();
+            }
+        }
+    }
 }
