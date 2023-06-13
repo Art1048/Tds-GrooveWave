@@ -7,13 +7,14 @@ namespace GW.Api.Data.Models
     {
         public MusicModel() { }
 
-        public MusicModel(int musicId, string musicName , string TrackLink, string Photo, int AuthorId)
+        public MusicModel(int musicId, string musicName , string trackLink, string photo, int authorId , string authorName)
         {
             this.MusicId = musicId;
             this.MusicName = musicName;
-            this.TrackLink = TrackLink;
-            this.Photo = Photo;
-            this.AuthorId = AuthorId;
+            this.TrackLink = trackLink;
+            this.Photo = photo;
+            this.AuthorId = authorId;
+            this.AuthorName = authorName;
         }
         [JsonIgnore]
         
@@ -21,6 +22,7 @@ namespace GW.Api.Data.Models
         public int MusicId { get; set; }
         public string MusicName { get; set; }
         public int AuthorId { get; set; }
+        public string AuthorName { get; set; }
         public int AlbumId { get; set; }
         public string TrackLink { get; set; } = default!;
         public string Photo { get; set; } = default!;

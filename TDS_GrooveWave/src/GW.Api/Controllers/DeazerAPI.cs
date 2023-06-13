@@ -46,6 +46,7 @@ public class MusicService
             this.Music.AuthorId = music.artist.id;
             this.Music.AlbumId = music.album.id; 
             this.Music.Photo = music.album.cover;
+            this.Music.AuthorName = music.artist.name;
         }
         else{
             this.Music = null;
