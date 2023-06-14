@@ -6,9 +6,8 @@ namespace GW.Api.Data.Models
     {
         public UserModel() { }
 
-        public UserModel(int userid, string firstName, string lastName, string? phone , string email, string password)
+        public UserModel( string firstName, string lastName, string? phone , string email, string password)
         {
-            UserId = userid;
             FirstName = firstName;
             LastName = lastName;
             Phone = phone;

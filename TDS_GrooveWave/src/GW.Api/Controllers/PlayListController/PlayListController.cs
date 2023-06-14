@@ -37,11 +37,18 @@ namespace GW.Api.Controllers.PlayListController
             }
         }
         
-        [HttpPost]
-        public IActionResult Post([FromServices] Context context, [FromBody] PlayListModel PlayList){
-            UserModel? User = context.UserModel?.FirstOrDefault(x => x.UserId == PlayList.UserID);
+        [HttpPost("/api/CreatePlayList/UserId={UserId:int}")]
+        public IActionResult Post([FromServices] Context context, [FromQuery] string PlaylistName , [FromRoute] int UserId){
+            UserModel? User = context.UserModel?.FirstOrDefault(x => x.UserId == UserId);
+            int PlaylistLastID = context.PlayListModel.OrderBy(playlist => playlist.PlayListId).Last().PlayListId;
 
             if(User != null){
+                PlayListModel PlayList = new PlayListModel();
+                PlayList.Name = PlaylistName;
+                PlayList.PlayListId = PlaylistLastID + 1;
+                PlayList.UserID = UserId;
+                PlayList.IsFavorite = false;
+                PlayList.Musics = new List<MusicModel>();
 
                 context.PlayListModel!.Add(PlayList);
                 if(User.PlayLists == null){

@@ -7,12 +7,10 @@ namespace GW.Api.Data.Models
     {
         public PlayListModel() {}
 
-        public PlayListModel(int id, int code, string name, bool isFavorite)
+        public PlayListModel(string name, bool isFavorite)
         {
-            PlayListId = id;
             Name = name;
-            IsFavorite = isFavorite;
-            List<MusicModel> Musics = new List<MusicModel>();
+            IsFavorite = false;
         }
         [Key]
         public int PlayListId { get; set; }

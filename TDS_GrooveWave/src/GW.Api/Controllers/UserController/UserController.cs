@@ -26,6 +26,26 @@ namespace GW.Api.Controllers.UserController
         
         [HttpPost]
         public IActionResult Post([FromServices] Context context, [FromBody] UserModel User){
+            int UserLastID = context.UserModel.OrderBy(user => user.UserId).Last().UserId;
+            int PlaylistLastID = context.PlayListModel.OrderBy(playlist => playlist.PlayListId).Last().PlayListId;
+
+            if(UserLastID == null){
+                UserLastID = 0;
+            }
+
+            if(PlaylistLastID == null){
+                PlaylistLastID = 0;
+            }
+            
+            User.UserId = UserLastID + 1;
+            List<PlayListModel>? PlayLists = new List<PlayListModel>();
+            PlayListModel? PlayListFavorita = new PlayListModel("Favoritas" , true);
+            PlayListFavorita.PlayListId = PlaylistLastID + 1;
+            PlayListFavorita.UserID = User.UserId;
+
+            User.PlayListFavorita = PlayListFavorita;
+            User.PlayLists = PlayLists; 
+
             context.UserModel!.Add(User);
             context.SaveChanges();
             return Ok(User);
