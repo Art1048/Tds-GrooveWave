@@ -40,10 +40,10 @@ namespace GW.Api.Controllers.MusicController
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] MusicModel Music , [FromServices] Context context){
+        public MusicModel Post([FromBody] MusicModel Music , [FromServices] Context context){
             context.MusicModel!.Add(Music);
             context.SaveChanges();
-            return Ok(Music);
+            return Music;
         }
     }
 }

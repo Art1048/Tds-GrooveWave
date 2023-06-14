@@ -26,9 +26,6 @@ namespace GW.Api.Data.Models
         public int AlbumId { get; set; }
         public string TrackLink { get; set; } = default!;
         public string Photo { get; set; } = default!;
-        public List<PlayListModel>? Playlists { get; set; }
-
-        // public List<int>? PlaylistsId { get; set; }
 
     }
 }

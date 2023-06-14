@@ -21,29 +21,12 @@ namespace GW.Api.Migrations
                     AuthorName = table.Column<string>(type: "TEXT", nullable: false),
                     AlbumId = table.Column<int>(type: "INTEGER", nullable: false),
                     TrackLink = table.Column<string>(type: "TEXT", nullable: false),
-                    Photo = table.Column<string>(type: "TEXT", nullable: false)
+                    Photo = table.Column<string>(type: "TEXT", nullable: false),
+                    PlayListModelPlayListId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MusicModel", x => x.MusicId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MusicModelPlayListModel",
-                columns: table => new
-                {
-                    MusicsMusicId = table.Column<int>(type: "INTEGER", nullable: false),
-                    PlaylistsPlayListId = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MusicModelPlayListModel", x => new { x.MusicsMusicId, x.PlaylistsPlayListId });
-                    table.ForeignKey(
-                        name: "FK_MusicModelPlayListModel_MusicModel_MusicsMusicId",
-                        column: x => x.MusicsMusicId,
-                        principalTable: "MusicModel",
-                        principalColumn: "MusicId",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -86,9 +69,9 @@ namespace GW.Api.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_MusicModelPlayListModel_PlaylistsPlayListId",
-                table: "MusicModelPlayListModel",
-                column: "PlaylistsPlayListId");
+                name: "IX_MusicModel_PlayListModelPlayListId",
+                table: "MusicModel",
+                column: "PlayListModelPlayListId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PlayListModel_UserModelUserId",
@@ -101,12 +84,11 @@ namespace GW.Api.Migrations
                 column: "PlayListFavoritaPlayListId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_MusicModelPlayListModel_PlayListModel_PlaylistsPlayListId",
-                table: "MusicModelPlayListModel",
-                column: "PlaylistsPlayListId",
+                name: "FK_MusicModel_PlayListModel_PlayListModelPlayListId",
+                table: "MusicModel",
+                column: "PlayListModelPlayListId",
                 principalTable: "PlayListModel",
-                principalColumn: "PlayListId",
-                onDelete: ReferentialAction.Cascade);
+                principalColumn: "PlayListId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_PlayListModel_UserModel_UserModelUserId",
@@ -122,9 +104,6 @@ namespace GW.Api.Migrations
             migrationBuilder.DropForeignKey(
                 name: "FK_UserModel_PlayListModel_PlayListFavoritaPlayListId",
                 table: "UserModel");
-
-            migrationBuilder.DropTable(
-                name: "MusicModelPlayListModel");
 
             migrationBuilder.DropTable(
                 name: "MusicModel");

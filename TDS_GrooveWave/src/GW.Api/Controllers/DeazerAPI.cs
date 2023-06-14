@@ -1,4 +1,7 @@
+using System.Text;
 using GW.Api.Data.Models;
+using GW.Api.Data.Repository;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 namespace GW.Api.Controllers.MusicServ;
 public class MusicService
@@ -23,6 +26,25 @@ public class MusicService
         else{
             return null;
         }
+        
+    }
+
+    public async Task<MusicModel> GetMusicFromData(Context context ,int id){
+            MusicModel Music = context.MusicModel.FirstOrDefault(x => x.MusicId == id);
+            if(Music != null){
+                return Music;
+            }
+            else{
+                MusicModel MusicDeazer = await GetMusic(id);
+
+                if(MusicDeazer != null)
+                {
+                    return MusicDeazer;
+                }
+                else{
+                    return null;
+                }  
+            }
         
     }
  

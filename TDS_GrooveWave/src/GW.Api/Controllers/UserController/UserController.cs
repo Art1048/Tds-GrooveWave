@@ -43,7 +43,7 @@ namespace GW.Api.Controllers.UserController
                 return NotFound();
             }
         }
-        
+
         [HttpDelete("{id:int}")]
         public IActionResult Delete([FromServices] Context context , [FromRoute] int id){
             UserModel User = context.UserModel.FirstOrDefault(x => x.UserId == id);

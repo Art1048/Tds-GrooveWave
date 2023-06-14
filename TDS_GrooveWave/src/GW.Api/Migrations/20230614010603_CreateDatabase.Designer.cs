@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GW.Api.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230613165150_CreateDatabase")]
+    [Migration("20230614010603_CreateDatabase")]
     partial class CreateDatabase
     {
         /// <inheritdoc />
@@ -44,11 +44,16 @@ namespace GW.Api.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("PlayListModelPlayListId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("TrackLink")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("MusicId");
+
+                    b.HasIndex("PlayListModelPlayListId");
 
                     b.ToTable("MusicModel");
                 });
@@ -114,19 +119,11 @@ namespace GW.Api.Migrations
                     b.ToTable("UserModel");
                 });
 
-            modelBuilder.Entity("MusicModelPlayListModel", b =>
+            modelBuilder.Entity("GW.Api.Data.Models.MusicModel", b =>
                 {
-                    b.Property<int>("MusicsMusicId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("PlaylistsPlayListId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("MusicsMusicId", "PlaylistsPlayListId");
-
-                    b.HasIndex("PlaylistsPlayListId");
-
-                    b.ToTable("MusicModelPlayListModel");
+                    b.HasOne("GW.Api.Data.Models.PlayListModel", null)
+                        .WithMany("Musics")
+                        .HasForeignKey("PlayListModelPlayListId");
                 });
 
             modelBuilder.Entity("GW.Api.Data.Models.PlayListModel", b =>
@@ -145,19 +142,9 @@ namespace GW.Api.Migrations
                     b.Navigation("PlayListFavorita");
                 });
 
-            modelBuilder.Entity("MusicModelPlayListModel", b =>
+            modelBuilder.Entity("GW.Api.Data.Models.PlayListModel", b =>
                 {
-                    b.HasOne("GW.Api.Data.Models.MusicModel", null)
-                        .WithMany()
-                        .HasForeignKey("MusicsMusicId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GW.Api.Data.Models.PlayListModel", null)
-                        .WithMany()
-                        .HasForeignKey("PlaylistsPlayListId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Musics");
                 });
 
             modelBuilder.Entity("GW.Api.Data.Models.UserModel", b =>
