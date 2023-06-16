@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using GW.Api.Data.Models;
 using GW.Api.Data.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace GW.Api.Controllers.UserController
 {
@@ -11,11 +12,11 @@ namespace GW.Api.Controllers.UserController
 
         [HttpGet]
         public IActionResult Get(
-         [FromServices] Context context) => Ok(context.UserModel!.ToList());
+         [FromServices] Context context) => Ok(context.UserModel?.Include(u => u.PlayLists).ThenInclude(u => u.Musics).Include(u => u.PlayListFavorita).ThenInclude(u => u.Musics).ToList());
 
         [HttpGet("{id:int}")]
         public IActionResult Get([FromServices] Context context , [FromRoute] int id){
-            UserModel User = context.UserModel.FirstOrDefault(x => x.UserId == id);
+            UserModel User = context.UserModel.Include(u => u.PlayLists).ThenInclude(u => u.Musics).Include(u => u.PlayListFavorita).ThenInclude(u => u.Musics).FirstOrDefault(x => x.UserId == id);
             if(User != null){
                 return Ok(User);
             }
@@ -26,15 +27,14 @@ namespace GW.Api.Controllers.UserController
         
         [HttpPost]
         public IActionResult Post([FromServices] Context context, [FromBody] UserModel User){
-            int UserLastID = context.UserModel.OrderBy(user => user.UserId).Last().UserId;
-            int PlaylistLastID = context.PlayListModel.OrderBy(playlist => playlist.PlayListId).Last().PlayListId;
+            int UserLastID = 0;
+            int PlaylistLastID = 0;
 
-            if(UserLastID == null){
-                UserLastID = 0;
-            }
+            UserModel UserDB = context.UserModel.FirstOrDefault(x => x.UserId == 1);
 
-            if(PlaylistLastID == null){
-                PlaylistLastID = 0;
+            if(UserDB != null){
+                UserLastID = context.UserModel.OrderBy(user => user.UserId).Last().UserId;
+                PlaylistLastID = context.PlayListModel.OrderBy(playlist => playlist.PlayListId).Last().PlayListId;
             }
             
             User.UserId = UserLastID + 1;
@@ -42,6 +42,7 @@ namespace GW.Api.Controllers.UserController
             PlayListModel? PlayListFavorita = new PlayListModel("Favoritas" , true);
             PlayListFavorita.PlayListId = PlaylistLastID + 1;
             PlayListFavorita.UserID = User.UserId;
+            PlayListFavorita.IsFavorite = true;
 
             User.PlayListFavorita = PlayListFavorita;
             User.PlayLists = PlayLists; 
@@ -55,9 +56,14 @@ namespace GW.Api.Controllers.UserController
         public IActionResult Put([FromServices] Context context , [FromBody] UserModel User){
             UserModel UserDB = context.UserModel.FirstOrDefault(x => x.UserId == User.UserId);
             if(UserDB != null){
-                context.UserModel!.Update(User);
+                UserDB.FirstName = User.FirstName;
+                UserDB.LastName = User.LastName;
+                UserDB.Phone = User.Phone;
+                UserDB.Email = User.Email;
+                UserDB.Password = User.Password;
+                context.UserModel!.Update(UserDB);
                 context.SaveChanges();
-                return Ok(User);
+                return Ok(UserDB);
             }
             else{
                 return NotFound();
@@ -66,8 +72,19 @@ namespace GW.Api.Controllers.UserController
 
         [HttpDelete("{id:int}")]
         public IActionResult Delete([FromServices] Context context , [FromRoute] int id){
-            UserModel User = context.UserModel.FirstOrDefault(x => x.UserId == id);
+            UserModel User = context.UserModel.Include(u => u.PlayLists).Include(u => u.PlayListFavorita).FirstOrDefault(x => x.UserId == id);;
             if(User != null){
+                List<PlayListModel>? PlayLists = User.PlayLists;
+                PlayListModel? PlayListFavorita = User.PlayListFavorita;
+                if(PlayListFavorita != null){
+                    context.PlayListModel!.Remove(PlayListFavorita);
+                }
+                if(PlayLists != null){
+                    foreach(PlayListModel e in PlayLists){
+                        context.PlayListModel!.Remove(e);
+                    }
+                }
+                
                 context.UserModel!.Remove(User);
                 context.SaveChanges();
                 return Ok(User);

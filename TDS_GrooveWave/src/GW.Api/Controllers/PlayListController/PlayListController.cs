@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using GW.Api.Data.Models;
 using GW.Api.Data.Repository;
 using GW.Api.Controllers.MusicServ;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace GW.Api.Controllers.PlayListController
 {
@@ -11,13 +13,14 @@ namespace GW.Api.Controllers.PlayListController
     {
 
 
-    [HttpGet]
+        [HttpGet]
         public IActionResult Get(
-         [FromServices] Context context) => Ok(context.PlayListModel!.ToList());
+         [FromServices] Context context) => Ok(context.PlayListModel!.Include(u => u.Musics).ToList());
+
 
         [HttpGet("{id:int}")]
         public IActionResult Get([FromServices] Context context , [FromRoute] int id){
-            PlayListModel PlayList = context.PlayListModel.FirstOrDefault(x => x.PlayListId == id);
+            PlayListModel PlayList = context.PlayListModel.Include(u => u.Musics).FirstOrDefault(x => x.PlayListId == id);
             if(PlayList != null){
                 return Ok(PlayList);
             }
@@ -28,7 +31,7 @@ namespace GW.Api.Controllers.PlayListController
 
         [HttpGet("/api/PlayList/UserId={UserId:int}")]
         public IActionResult GetResult([FromServices] Context context , [FromRoute] int UserId){
-            PlayListModel PlayList = context.PlayListModel.FirstOrDefault(x => x.UserID == UserId);
+            List<PlayListModel> PlayList = context.PlayListModel!.Include(u => u.Musics).Where(u => u.UserID == UserId).ToList();
             if(PlayList != null){
                 return Ok(PlayList);
             }
@@ -39,7 +42,7 @@ namespace GW.Api.Controllers.PlayListController
         
         [HttpPost("/api/CreatePlayList/UserId={UserId:int}")]
         public IActionResult Post([FromServices] Context context, [FromQuery] string PlaylistName , [FromRoute] int UserId){
-            UserModel? User = context.UserModel?.FirstOrDefault(x => x.UserId == UserId);
+            UserModel? User = context.UserModel.Include(u => u.PlayLists).ThenInclude(u => u.Musics).Include(u => u.PlayListFavorita).ThenInclude(u => u.Musics).FirstOrDefault(x => x.UserId == UserId);
             int PlaylistLastID = context.PlayListModel.OrderBy(playlist => playlist.PlayListId).Last().PlayListId;
 
             if(User != null){
@@ -72,41 +75,70 @@ namespace GW.Api.Controllers.PlayListController
 
                 context.PlayListModel!.Update(PlayListDB);
                 context.SaveChanges();
-                return Ok(PlayList);
+                return Ok(PlayListDB);
             }
             else{
                 return NotFound();
             }
         }
 
-        [HttpPut("/api/PlayListAddMusic={id:int}/MusicId={MusicId:int}")]
-        public virtual async Task<IActionResult> Put([FromServices] Context context , [FromRoute] int id , [FromRoute] int MusicId){
-            PlayListModel PlayListDB = context.PlayListModel.FirstOrDefault(x => x.PlayListId == id);
+        [HttpPut("/api/PlayListOperationMusic={id:int}/MusicId={MusicId:int}/Activity={i:bool}")]
+        public virtual async Task<IActionResult> Put([FromServices] Context context , [FromRoute] int id , [FromRoute] int MusicId , [FromRoute] bool i){
+            if(i == true){
+                PlayListModel PlayListDB = context.PlayListModel.Include(u => u.Musics).FirstOrDefault(x => x.PlayListId == id);
 
-            if(PlayListDB != null){
-                MusicService musicController = new MusicService();
-                MusicModel Music  = await musicController.GetMusicFromData(context, MusicId);
-                if(Music != null){
+                if(PlayListDB != null){
+                    MusicService musicController = new MusicService();
+                    MusicModel Music  = await musicController.GetMusicFromData(context, MusicId);
+                    if(Music != null){
+                        MusicModel MusicDB = context.MusicModel.FirstOrDefault(u => u.MusicId == Music.MusicId);
+                        if(MusicDB == null){
+                            context.MusicModel.Add(Music);
+                        }
+                        context.SaveChanges();
+                        PlayListDB.Musics.Add(Music);
+                        context.PlayListModel!.Update(PlayListDB);
+                        context.SaveChanges();
+                        return Ok(PlayListDB);
 
-                    PlayListDB.Musics?.Add(Music);
-                    context.PlayListModel!.Update(PlayListDB);
-                    context.SaveChanges();
-                    return Ok(PlayListDB);
-
-                }else{
-                    return NotFound("Deu ruim aqui");
+                    }else{
+                        return NotFound("Música não existe");
+                    }
+                    
                 }
-                
+                else{
+                    return NotFound("Playlist não existe");
+                }
             }
             else{
-                return NotFound("Deu ruim aqui em baixo");
+                PlayListModel PlayListDB = context.PlayListModel.Include(u => u.Musics).FirstOrDefault(x => x.PlayListId == id);
+
+                if(PlayListDB != null){
+                    MusicModel MusicPlaylist = PlayListDB.Musics.Find(u => u.MusicId == MusicId);
+                    if(MusicPlaylist != null){
+
+                        PlayListDB.Musics.Remove(MusicPlaylist);
+                        context.PlayListModel!.Update(PlayListDB);
+                        context.SaveChanges();
+                        return Ok(PlayListDB);
+
+                    }else{
+                        return NotFound("Música não existe");
+                    }
+                    
+                }
+                else{
+                    return NotFound("Playlist não existe");
+                }
             }
+            
         }
         
         [HttpDelete("{id:int}")]
         public IActionResult Delete([FromServices] Context context , [FromRoute] int id){
-            PlayListModel PlayList = context.PlayListModel.FirstOrDefault(x => x.PlayListId == id);
+            PlayListModel PlayList = context.PlayListModel.Include(u => u.Musics).FirstOrDefault(x => x.PlayListId == id);
             if(PlayList != null){
+                PlayList.Musics.RemoveAll(u => true);
                 context.PlayListModel!.Remove(PlayList);
                 context.SaveChanges();
                 return Ok(PlayList);

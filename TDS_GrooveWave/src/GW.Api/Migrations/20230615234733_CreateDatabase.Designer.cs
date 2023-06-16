@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GW.Api.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230614142142_CreateDatabase")]
+    [Migration("20230615234733_CreateDatabase")]
     partial class CreateDatabase
     {
         /// <inheritdoc />
