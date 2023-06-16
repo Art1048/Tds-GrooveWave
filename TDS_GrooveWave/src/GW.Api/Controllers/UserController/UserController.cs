@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using GW.Api.Data.Models;
 using GW.Api.Data.Repository;
 using Microsoft.EntityFrameworkCore;
+using GW.Api.OAuth;
 
 namespace GW.Api.Controllers.UserController
 {
@@ -9,6 +10,8 @@ namespace GW.Api.Controllers.UserController
     [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
+
+        //private AuthService _authService;
 
         [HttpGet]
         public IActionResult Get(
@@ -27,6 +30,11 @@ namespace GW.Api.Controllers.UserController
         
         [HttpPost]
         public IActionResult Post([FromServices] Context context, [FromBody] UserModel User){
+
+            //bool IsValid = _authService.RegisterUser(User , context);
+            // if(IsValid == false){
+            //     return BadRequest();
+            // }
             int UserLastID = 0;
             int PlaylistLastID = 0;
 
@@ -51,6 +59,7 @@ namespace GW.Api.Controllers.UserController
             context.SaveChanges();
             return Ok(User);
         }
+
 
         [HttpPut]
         public IActionResult Put([FromServices] Context context , [FromBody] UserModel User){
@@ -93,5 +102,22 @@ namespace GW.Api.Controllers.UserController
                 return NotFound();
             }
         }
+
+        // [HttpPost]
+        // public IActionResult Login([FromServices] Context context ,string email, string password)
+        // {
+        //     var user = context.UserModel?.FirstOrDefault(u => u.Email == email && u.Password == password);
+        //     if (user != null)
+        //     {
+
+        //         return Ok($"UserId{user.UserId.ToString()}");
+        //     }
+        //     return BadRequest();
+        // }
+
+        // public IActionResult Logout()
+        // {
+        //     return Ok("Log out!");
+        // }
     }
 }
