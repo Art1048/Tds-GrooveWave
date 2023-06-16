@@ -3,15 +3,17 @@ using GW.Api.Data.Models;
 using GW.Api.Data.Repository;
 using Microsoft.EntityFrameworkCore;
 using GW.Api.OAuth;
+using Microsoft.AspNetCore.Http;
+
 
 namespace GW.Api.Controllers.UserController
 {
     [ApiController]
     [Route("api/[controller]")]
+    
     public class UserController : ControllerBase
     {
-
-        //private AuthService _authService;
+        
 
         [HttpGet]
         public IActionResult Get(
@@ -27,14 +29,29 @@ namespace GW.Api.Controllers.UserController
                 return NotFound();
             }
         }
+
+         [HttpGet("api/CurrentUser")]
+        public string GetResult(
+         [FromServices] Context context) {
+            string CurrentUser = HttpContext.Session.GetString("UserId");
+            if(CurrentUser == null || CurrentUser == ""){
+                return "";
+            }
+            return CurrentUser;
+         } 
+
         
         [HttpPost]
         public IActionResult Post([FromServices] Context context, [FromBody] UserModel User){
 
-            //bool IsValid = _authService.RegisterUser(User , context);
-            // if(IsValid == false){
-            //     return BadRequest();
-            // }
+            AuthService _authService = new AuthService();
+            bool IsValid = true;
+
+            IsValid = _authService.RegisterUser(User , context);
+            if(IsValid == false){
+                return BadRequest();
+            }
+
             int UserLastID = 0;
             int PlaylistLastID = 0;
 
@@ -103,21 +120,27 @@ namespace GW.Api.Controllers.UserController
             }
         }
 
-        // [HttpPost]
-        // public IActionResult Login([FromServices] Context context ,string email, string password)
-        // {
-        //     var user = context.UserModel?.FirstOrDefault(u => u.Email == email && u.Password == password);
-        //     if (user != null)
-        //     {
+        [HttpGet("api/login")]
+         public IActionResult Get([FromServices] Context context ,[FromQuery]string email, [FromQuery]string password)
+         {
+             AuthService _authService = new AuthService();
 
-        //         return Ok($"UserId{user.UserId.ToString()}");
-        //     }
-        //     return BadRequest();
-        // }
+             UserModel User = _authService.Login(email , password , context);
+             if(User != null){
 
-        // public IActionResult Logout()
-        // {
-        //     return Ok("Log out!");
-        // }
+                HttpContext?.Session.SetString("UserId", User.UserId.ToString());
+                HttpContext?.Session.SetString("UserName", User.FirstName);
+                return Ok(HttpContext.Session.GetString("UserId"));
+             }else{
+                return BadRequest();
+             }  
+         }
+
+         [HttpPost("api/logout")]
+         public IActionResult Post([FromServices] Context context)
+         {
+            HttpContext?.Session.Clear();
+            return Ok();
+         }
     }
 }

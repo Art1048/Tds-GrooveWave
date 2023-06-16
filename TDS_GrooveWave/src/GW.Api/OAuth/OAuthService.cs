@@ -23,9 +23,16 @@ public class AuthService
         
     }
 
-    public bool Login(string username, string password , Context context)
+    public UserModel Login(string email, string password , Context context)
     {
-        // Lógica para autenticar o usuário com as credenciais fornecidas
-        return true;
+        var user = context.UserModel?.FirstOrDefault(u => u.Email == email && u.Password == password);
+        if (user != null)
+        {
+            return user;
+        }
+        else{
+            return null;
+        }
+        
     }
 }
