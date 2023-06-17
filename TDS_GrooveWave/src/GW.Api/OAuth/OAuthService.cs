@@ -9,7 +9,7 @@ public class AuthService
     public bool RegisterUser(UserModel user , Context context)
     {
         if(user != null && (user.Email != null || user.Email != "") && (user.Password != null || user.Password != "") && (user.FirstName != null || user.FirstName != "") && (user.LastName != null || user.LastName!= "")){
-            if(user.Password.Length > 8){
+            if(user.Password.Length >= 8){
                 return true;
             }
             else{
