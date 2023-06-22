@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -14,15 +15,15 @@ namespace GW.Api.Migrations
                 name: "MusicModel",
                 columns: table => new
                 {
-                    MusicId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    MusicName = table.Column<string>(type: "TEXT", nullable: false),
-                    AuthorId = table.Column<int>(type: "INTEGER", nullable: false),
-                    AuthorName = table.Column<string>(type: "TEXT", nullable: false),
-                    AlbumId = table.Column<int>(type: "INTEGER", nullable: false),
-                    TrackLink = table.Column<string>(type: "TEXT", nullable: false),
-                    Photo = table.Column<string>(type: "TEXT", nullable: false),
-                    PlayListModelPlayListId = table.Column<int>(type: "INTEGER", nullable: true)
+                    MusicId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    MusicName = table.Column<string>(type: "text", nullable: false),
+                    AuthorId = table.Column<int>(type: "integer", nullable: false),
+                    AuthorName = table.Column<string>(type: "text", nullable: false),
+                    AlbumId = table.Column<int>(type: "integer", nullable: false),
+                    TrackLink = table.Column<string>(type: "text", nullable: false),
+                    Photo = table.Column<string>(type: "text", nullable: false),
+                    PlayListModelPlayListId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -33,12 +34,12 @@ namespace GW.Api.Migrations
                 name: "PlayListModel",
                 columns: table => new
                 {
-                    PlayListId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    UserID = table.Column<int>(type: "INTEGER", nullable: false),
-                    IsFavorite = table.Column<bool>(type: "INTEGER", nullable: false),
-                    UserModelUserId = table.Column<int>(type: "INTEGER", nullable: true)
+                    PlayListId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    UserID = table.Column<int>(type: "integer", nullable: false),
+                    IsFavorite = table.Column<bool>(type: "boolean", nullable: false),
+                    UserModelUserId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -49,14 +50,14 @@ namespace GW.Api.Migrations
                 name: "UserModel",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    FirstName = table.Column<string>(type: "TEXT", nullable: false),
-                    LastName = table.Column<string>(type: "TEXT", nullable: false),
-                    Phone = table.Column<string>(type: "TEXT", nullable: true),
-                    Email = table.Column<string>(type: "TEXT", nullable: false),
-                    Password = table.Column<string>(type: "TEXT", nullable: false),
-                    PlayListFavoritaPlayListId = table.Column<int>(type: "INTEGER", nullable: true)
+                    UserId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    FirstName = table.Column<string>(type: "text", nullable: false),
+                    LastName = table.Column<string>(type: "text", nullable: false),
+                    Phone = table.Column<string>(type: "text", nullable: true),
+                    Email = table.Column<string>(type: "text", nullable: false),
+                    Password = table.Column<string>(type: "text", nullable: false),
+                    PlayListFavoritaPlayListId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {

@@ -18,7 +18,7 @@ namespace GW.Api.Data.Models
         [Required(ErrorMessage = "O nome da playlist é obrigatório")]
         public string Name { get; set; } = default!;
         public int UserID {get; set;}
-        public List<MusicModel> Musics { get; set; }
+        public List<MusicModel>? Musics { get; set; }
 
         public bool IsFavorite { get; set; }
     }

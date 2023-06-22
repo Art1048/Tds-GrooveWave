@@ -1,0 +1,10 @@
+# Dockerfile DB
+FROM postgres:latest
+
+# Variáveis de ambiente do PostgreSQL
+ENV POSTGRES_PASSWORD=4Vfl4AtYdFMrxNq
+ENV POSTGRES_USER=Art
+ENV POSTGRES_DB=meu_postgres
+
+# Porta padrão do PostgreSQL
+EXPOSE 5432
