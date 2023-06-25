@@ -29,6 +29,7 @@ namespace GW.Api.Controllers.MusicController
 
                 if(MusicDeazer != null)
                 {
+                    MusicDeazer.MusicId = id;
                     Post(MusicDeazer ,context);
                     return Ok(MusicDeazer);
                 }

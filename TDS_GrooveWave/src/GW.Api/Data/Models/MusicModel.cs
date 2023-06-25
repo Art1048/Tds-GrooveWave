@@ -16,7 +16,6 @@ namespace GW.Api.Data.Models
             this.AuthorId = authorId;
             this.AuthorName = authorName;
         }
-        [JsonIgnore]
         
         [Key]
         public int MusicId { get; set; }

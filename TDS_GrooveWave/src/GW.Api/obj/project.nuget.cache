@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "G9QAGONGyqY8W7eq9Bpui3RWbb8cSDDH0d1s3QObSBmbs59JI7R6KPlunZdWPWKMX86WHmJTNLDC0cpe4eSDog==",
+  "dgSpecHash": "2dW7/7hPC+rLRZfoCy9kkAdjQftAGU4RNjLUp5G602MEIKDbs7+ZZl5GjxrPOIeBp+WwKgy7CDbKFncGfmfudg==",
   "success": true,
-  "projectFilePath": "c:\\Users\\arthu\\OneDrive\\Área de Trabalho\\Tds-GrroveWave\\Tds-GrooveWave\\TDS_GrooveWave\\src\\GW.Api\\GW.Api.csproj",
+  "projectFilePath": "C:\\Users\\arthu\\OneDrive\\Área de Trabalho\\Tds-GrroveWave\\Tds-GrooveWave\\TDS_GrooveWave\\src\\GW.Api\\GW.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\arthu\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\arthu\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.3\\microsoft.aspnetcore.openapi.7.0.3.nupkg.sha512",

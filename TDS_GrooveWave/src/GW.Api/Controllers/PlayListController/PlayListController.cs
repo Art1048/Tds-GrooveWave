@@ -39,6 +39,17 @@ namespace GW.Api.Controllers.PlayListController
                 return NotFound();
             }
         }
+
+        [HttpGet("/api/PlayListFavorita/UserId={UserId:int}")]
+        public IActionResult GetFavorite([FromServices] Context context , [FromRoute] int UserId){
+            PlayListModel PlayList = context.PlayListModel!.Include(u => u.Musics).Where(u => u.UserID == UserId && u.IsFavorite == true).FirstOrDefault();
+            if(PlayList != null){
+                return Ok(PlayList);
+            }
+            else{
+                return NotFound();
+            }
+        }
         
         [HttpPost("/api/CreatePlayList/UserId={UserId:int}")]
         public IActionResult Post([FromServices] Context context, [FromQuery] string PlaylistName , [FromRoute] int UserId){

@@ -30,16 +30,6 @@ namespace GW.Api.Controllers.UserController
             }
         }
 
-         [HttpGet("api/CurrentUser")]
-        public string GetResult(
-         [FromServices] Context context) {
-            string CurrentUser = HttpContext.Session.GetString("UserId");
-            if(CurrentUser == null || CurrentUser == ""){
-                return "";
-            }
-            return CurrentUser;
-         } 
-
         
         [HttpPost]
         public IActionResult Post([FromServices] Context context, [FromBody] UserModel User){
@@ -98,15 +88,17 @@ namespace GW.Api.Controllers.UserController
 
         [HttpDelete("{id:int}")]
         public IActionResult Delete([FromServices] Context context , [FromRoute] int id){
-            UserModel User = context.UserModel.Include(u => u.PlayLists).Include(u => u.PlayListFavorita).FirstOrDefault(x => x.UserId == id);;
+            UserModel User = context.UserModel.Include(u => u.PlayLists).ThenInclude(u => u.Musics).Include(u => u.PlayListFavorita).ThenInclude(u => u.Musics).FirstOrDefault(x => x.UserId == id);;
             if(User != null){
                 List<PlayListModel>? PlayLists = User.PlayLists;
                 PlayListModel? PlayListFavorita = User.PlayListFavorita;
                 if(PlayListFavorita != null){
+                    PlayListFavorita.Musics.Clear();
                     context.PlayListModel!.Remove(PlayListFavorita);
                 }
                 if(PlayLists != null){
                     foreach(PlayListModel e in PlayLists){
+                        e.Musics.Clear();
                         context.PlayListModel!.Remove(e);
                     }
                 }
@@ -127,10 +119,7 @@ namespace GW.Api.Controllers.UserController
 
              UserModel User = _authService.Login(email , password , context);
              if(User != null){
-
-                HttpContext?.Session.SetString("UserId", User.UserId.ToString());
-                HttpContext?.Session.SetString("UserName", User.FirstName);
-                return Ok(HttpContext.Session.GetString("UserId"));
+                return Ok(User);
              }else{
                 return BadRequest();
              }  
@@ -139,7 +128,6 @@ namespace GW.Api.Controllers.UserController
          [HttpPost("api/logout")]
          public IActionResult Post([FromServices] Context context)
          {
-            HttpContext?.Session.Clear();
             return Ok();
          }
     }

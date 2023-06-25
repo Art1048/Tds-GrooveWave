@@ -8,12 +8,6 @@ EXPOSE 80
 ENV ASPNETCORE_URLS=http://+:5072;http://+:80;
 ENV ASPNETCORE_ENVIRONMENT=Development
 
-# Variáveis de ambiente do PostgreSQL
-ENV POSTGRES_PASSWORD=4Vfl4AtYdFMrxNq
-ENV POSTGRES_USER=Art
-ENV POSTGRES_DB=meu_postgres
-ENV DB_CONNECTION_STRING=Host=meu_postgres;Port=5432;Database=meu_postgres;Username=Art;Password=4Vfl4AtYdFMrxNq
-
 # Instalação das dependências
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 
@@ -21,9 +15,12 @@ WORKDIR "/src"
 
 COPY ["GW.Api/GW.Api.csproj", "GW.Api/"]
 RUN dotnet restore "GW.Api/GW.Api.csproj"
+
+
 COPY . .
 WORKDIR "/src/GW.Api"
 RUN dotnet build "GW.Api.csproj" -c Release -o /app/build
+
 
 # Publicação da API
 FROM build AS publish

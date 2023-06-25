@@ -1,6 +1,6 @@
 version: "3.9"
 services:
-  db:
+  gw_db:
     build:
       context: .
       dockerfile: Dockerfile.DB
@@ -10,16 +10,13 @@ services:
       - POSTGRES_DB=meu_postgres
     ports:
       - "5432:5432"
-  api:
+  gw_api:
     build:
       context: ./src
       dockerfile: Dockerfile.API
-    depends_on:
-      - db
     environment:
-      - POSTGRES_PASSWORD=4Vfl4AtYdFMrxNq
-      - POSTGRES_USER=Art
-      - POSTGRES_DB=meu_postgres
-      - DB_CONNECTION_STRING=Host=db;Port=5432;Database=meu_postgres;Username=Art;Password=4Vfl4AtYdFMrxNq
+      - CONNECTION_STRING=Host=gw_db;Database=meu_postgres;Username=Art;Password=4Vfl4AtYdFMrxNq
+    depends_on:
+      - gw_db
     ports:
       - "80:80"

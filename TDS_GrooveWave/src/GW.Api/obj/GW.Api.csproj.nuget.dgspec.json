@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\arthu\\OneDrive\\Área de Trabalho\\Tds-GrroveWave\\Tds-GrooveWave\\TDS_GrooveWave\\src\\GW.Api\\GW.Api.csproj": {}
+    "C:\\Users\\arthu\\OneDrive\\Área de Trabalho\\Tds-GrroveWave\\Tds-GrooveWave\\TDS_GrooveWave\\src\\GW.Api\\GW.Api.csproj": {}
   },
   "projects": {
-    "c:\\Users\\arthu\\OneDrive\\Área de Trabalho\\Tds-GrroveWave\\Tds-GrooveWave\\TDS_GrooveWave\\src\\GW.Api\\GW.Api.csproj": {
+    "C:\\Users\\arthu\\OneDrive\\Área de Trabalho\\Tds-GrroveWave\\Tds-GrooveWave\\TDS_GrooveWave\\src\\GW.Api\\GW.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\arthu\\OneDrive\\Área de Trabalho\\Tds-GrroveWave\\Tds-GrooveWave\\TDS_GrooveWave\\src\\GW.Api\\GW.Api.csproj",
+        "projectUniqueName": "C:\\Users\\arthu\\OneDrive\\Área de Trabalho\\Tds-GrroveWave\\Tds-GrooveWave\\TDS_GrooveWave\\src\\GW.Api\\GW.Api.csproj",
         "projectName": "GW.Api",
-        "projectPath": "c:\\Users\\arthu\\OneDrive\\Área de Trabalho\\Tds-GrroveWave\\Tds-GrooveWave\\TDS_GrooveWave\\src\\GW.Api\\GW.Api.csproj",
+        "projectPath": "C:\\Users\\arthu\\OneDrive\\Área de Trabalho\\Tds-GrroveWave\\Tds-GrooveWave\\TDS_GrooveWave\\src\\GW.Api\\GW.Api.csproj",
         "packagesPath": "C:\\Users\\arthu\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\arthu\\OneDrive\\Área de Trabalho\\Tds-GrroveWave\\Tds-GrooveWave\\TDS_GrooveWave\\src\\GW.Api\\obj\\",
+        "outputPath": "C:\\Users\\arthu\\OneDrive\\Área de Trabalho\\Tds-GrroveWave\\Tds-GrooveWave\\TDS_GrooveWave\\src\\GW.Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
