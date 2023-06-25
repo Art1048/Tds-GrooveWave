@@ -11,21 +11,21 @@ namespace GW.Api.Data.Repository
         protected override void OnConfiguring(DbContextOptionsBuilder options) 
 
         //PostgresLocal
-        =>
-            options.UseNpgsql("Host=localhost:5432;Database=meu_postgres;Username=Art;Password=4Vfl4AtYdFMrxNq");
+        // =>
+        //     options.UseNpgsql("Host=localhost:5432;Database=meu_postgres;Username=Art;Password=4Vfl4AtYdFMrxNq");
 
 
         // Postgres docker
-        // {
-        //     string connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
+        {
+            string connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
 
-        //     if (string.IsNullOrEmpty(connectionString))
-        //     {
-        //         throw new InvalidOperationException("A connection string must be provided.");
-        //     }
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                throw new InvalidOperationException("A connection string must be provided.");
+            }
 
-        //     options.UseNpgsql(connectionString);
-        // }
+            options.UseNpgsql(connectionString);
+        }
 
 
         
