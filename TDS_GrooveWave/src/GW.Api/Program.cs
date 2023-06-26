@@ -1,6 +1,4 @@
-using Microsoft.AspNetCore.HttpOverrides;
 using GW.Api.Data.Repository;
-using Microsoft.AspNetCore.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();

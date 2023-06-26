@@ -6,8 +6,8 @@ using Newtonsoft.Json.Linq;
 namespace GW.Api.Controllers.MusicServ;
 public class MusicService
 {
-    private readonly HttpClient httpClient;
-    public MusicModel Music;
+    private readonly HttpClient httpClient; // Requisição
+    public MusicModel Music; // Musica a ser tratada
 
 
     public MusicService()
@@ -16,7 +16,7 @@ public class MusicService
         Music = new MusicModel();
     }
 
-    public async Task<MusicModel> GetMusic(int id){
+    public async Task<MusicModel?> GetMusic(int id){ //Recupera musica da api do deezer
         await this.GetMusicFromExternalAPIAsync(id);
 
         if(this.Music.MusicName != null)
@@ -29,13 +29,13 @@ public class MusicService
         
     }
 
-    public async Task<MusicModel> GetMusicFromData(Context context ,int id){
-            MusicModel Music = context.MusicModel.FirstOrDefault(x => x.MusicId == id);
+    public async Task<MusicModel?> GetMusicFromData(Context context ,int id){ //Verifica se a musica existe no banco, caso não recupera musica da api do deezer, e a retorna
+            MusicModel? Music = context.MusicModel?.FirstOrDefault(x => x.MusicId == id);
             if(Music != null){
                 return Music;
             }
             else{
-                MusicModel MusicDeazer = await GetMusic(id);
+                MusicModel? MusicDeazer = await GetMusic(id);
 
                 if(MusicDeazer != null)
                 {
@@ -48,7 +48,7 @@ public class MusicService
         
     }
  
-    private async Task GetMusicFromExternalAPIAsync(int id)
+    private async Task GetMusicFromExternalAPIAsync(int id) // Get Music by id Deezer
     {
         httpClient.BaseAddress = new Uri("https://api.deezer.com/");
         httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));

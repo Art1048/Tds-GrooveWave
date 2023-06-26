@@ -1,7 +1,6 @@
 using GW.Api.Data.Models;
 using GW.Api.Data.Repository;
-using Microsoft.AspNetCore.Http;
-
+using System.Text.RegularExpressions;
 
 namespace GW.Api.OAuth;
 public class AuthService
@@ -9,8 +8,16 @@ public class AuthService
     public bool RegisterUser(UserModel user , Context context)
     {
         if(user != null && (user.Email != null || user.Email != "") && (user.Password != null || user.Password != "") && (user.FirstName != null || user.FirstName != "") && (user.LastName != null || user.LastName!= "")){
-            if(user.Password.Length >= 8){
-                return true;
+            if(user.Password!.Length >= 8){
+                Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,6})+)((\.(\w){2,6})+)$");
+                Match match = regex.Match(user.Email!);
+                if(match.Success){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+                
             }
             else{
                 return false;

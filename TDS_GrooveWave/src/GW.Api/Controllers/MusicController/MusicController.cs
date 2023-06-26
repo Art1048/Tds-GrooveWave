@@ -19,13 +19,13 @@ namespace GW.Api.Controllers.MusicController
         [HttpGet("{id:int}")]
         public virtual async Task<IActionResult> Get([FromServices] Context context , [FromRoute] int id)
         {
-            MusicModel Music = context.MusicModel.FirstOrDefault(x => x.MusicId == id);
+            MusicModel? Music = context.MusicModel?.FirstOrDefault(x => x.MusicId == id);
             if(Music != null){
                 return Ok(Music);
             }
             else{
                 MusicService MusicService = new MusicService();
-                MusicModel MusicDeazer = await MusicService.GetMusic(id);
+                MusicModel? MusicDeazer = await MusicService.GetMusic(id);
 
                 if(MusicDeazer != null)
                 {

@@ -20,7 +20,7 @@ namespace GW.Api.Controllers.PlayListController
 
         [HttpGet("{id:int}")]
         public IActionResult Get([FromServices] Context context , [FromRoute] int id){
-            PlayListModel PlayList = context.PlayListModel.Include(u => u.Musics).FirstOrDefault(x => x.PlayListId == id);
+            PlayListModel? PlayList = context.PlayListModel.Include(u => u.Musics).FirstOrDefault(x => x.PlayListId == id);
             if(PlayList != null){
                 return Ok(PlayList);
             }
