@@ -124,11 +124,5 @@ namespace GW.Api.Controllers.UserController
                 return BadRequest();
              }  
          }
-
-         [HttpPost("api/logout")]
-         public IActionResult Post([FromServices] Context context)
-         {
-            return Ok();
-         }
     }
 }
